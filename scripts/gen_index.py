@@ -36,7 +36,7 @@ def generate_markdown():
         
         # --- 檔案檢查機制 ---
         tex_file = folder / "main.tex"
-        pdf_file = folder / f"{name}.pdf"
+        pdf_file = folder / "main.pdf"
 
         # 判定 TeX 連結
         if tex_file.exists():
@@ -48,7 +48,7 @@ def generate_markdown():
 
         # 判定 PDF 連結
         if pdf_file.exists():
-            pdf_link = f"[PDF](./{name}/{name}.pdf)"
+            pdf_link = f"[PDF](./{name}/main.pdf)"
             pdf_status = "✅"
         else:
             pdf_link = "⏳ 待上傳"
