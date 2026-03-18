@@ -1,0 +1,10 @@
+[project]
+name = "math-exams-repository"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pathlib>=1.0.1",
+    "pygments>=2.19.2",
+]

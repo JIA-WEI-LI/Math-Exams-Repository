@@ -1,0 +1,18 @@
+# Python (uv)
+.venv/
+__pycache__/
+*.pyc
+
+# LaTeX 暫存檔 (最重要)
+*.aux
+*.log
+*.toc
+*.out
+*.gz
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.pdf-sys-g*
+*.xdv
+
+# *.pdf
