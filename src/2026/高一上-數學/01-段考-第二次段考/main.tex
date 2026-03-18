@@ -1,0 +1,226 @@
+\documentclass[b4paper,12pt]{exam}
+
+%% 引入Package %%
+\usepackage{graphicx}
+\usepackage{extsizes}
+\usepackage[margin=2cm]{geometry}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{mathtools,amsthm,amssymb}
+\usepackage[shortlabels,inline]{enumitem}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.pathmorphing,decorations.markings,arrows.meta,calc,intersections,bending}
+\usepackage{ulem}
+\usepackage{enumitem}
+\usepackage{ifthen}
+\usepackage{draftwatermark}
+\usepgfplotslibrary{fillbetween}
+
+% 浮水印開關
+\newif\ifshowWatermark
+\showWatermarktrue
+\ifshowWatermark
+  \SetWatermarkText{中山附中樣卷}
+  \SetWatermarkScale{0.8}
+\else
+  \SetWatermarkText{}
+\fi
+
+% 選擇題排版指令
+\newcommand{\anslabel}[1]{%
+  \makebox[3em][c]{%
+    \ifshowAnswer{\color{red}#1}\else\phantom{#1}\fi
+  }%
+}
+\newcommand{\anslist}[1]{#1}
+
+\newcommand{\fourch}[7]{\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(A)~#1 & (B)~#2 & (C)~#3 & (D)~#4 & (E)~#5\end{tabular}}
+\newcommand{\twoch}[7]{\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(A)~#1 & (B)~#2\end{tabular}\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(C)~#3 & (D)~#4\end{tabular}\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(E)~#5 & ~\end{tabular}}
+\newcommand{\onech}[6]{\vspace{#6}\\(A)~#1\vspace{#6}\\(B)~#2\vspace{#6}\\(C)~#3\vspace{#6}\\(D)~#4\vspace{#6}\\(E)~#5}
+
+% 簡化命令
+\newcommand\twoSolution[2]{$x=#1$ 或 $x=#2$}
+
+% 標題區塊參數化
+\newcommand\testTitle[1]{\section*{#1}}
+\newcommand\testSubsection[3]{\subsection*{#1 (每題\ #2\ 分，共\ #3\ 分)}}
+
+% 中文字體 (需 XeLaTeX)
+\usepackage[CJKmath=true,AutoFakeBold=3,AutoFakeSlant=.2]{xeCJK}
+\setCJKmainfont{AR PL KaitiM Big5}
+\setCJKsansfont{AR PL KaitiM Big5}
+\setCJKmonofont{AR PL KaitiM Big5}
+\newCJKfontfamily\Kai{標楷體}
+\newCJKfontfamily\Hei{微軟正黑體}
+\newCJKfontfamily\NewMing{新細明體}
+\XeTeXlinebreaklocale "zh"
+
+% 格式設定
+\setlength{\headheight}{15pt}
+\setlength{\parindent}{22pt}
+
+% 答案開關
+\newif\ifshowAnswer
+\showAnswerfalse
+\newcommand{\colorAnswer}[2]{%
+{
+  \makebox[6em][c]{% <-- 固定寬度，自己調整
+    \ifshowAnswer
+      {\color{#1}#2}%
+    \else
+      % 不顯示答案，但保持空間
+      % 可以放空白，或放透明字
+      \phantom{#2}%
+    \fi
+  }}%
+}
+
+\begin{document}
+\captionsetup[figure]{labelfont={bf}, name={\text{圖}}, labelsep=period}
+\captionsetup[table]{labelfont={bf}, name={\text{表}}, labelsep=period}
+
+% ====== 考卷標題 ======
+{\centering
+\testTitle{國立中山大學附中114學年度第一學期高一上數學第二次段考卷}
+}
+
+\hfill 一年\hspace{2em}班\hspace{2em}號\quad 姓名：\hspace{6em}\quad\\
+\vspace{0.5em}
+
+\footer {}{\iflastpage{\textbf{請記得檢查並驗算}}{\oddeven{\textbf{背面仍有題目，請翻面作答}}{}}}{}
+
+\subsection*{一、多重選擇題(每題\ 8\ 分，錯一個選項扣\ 3\ 分，共\ 24\ 分)}
+\begin{enumerate}[itemsep=0.5em, topsep=1em]\setcounter{enumi}{0}
+    \item (\colorAnswer{red}{ABCDE}) 下列平面上的點，哪些落在 $x-y<8$且$x^2+y^2+8x-6y-42$~{\color{red}$<$}~$0$？\\[0.5em]
+        (A)~{$(0,0)$}\hspace{2em}
+        (B)~{$(-2,1)$}\hspace{2em}
+        (C)~{$(-6,4)$}\hspace{2em}
+        (D)~{$(-\pi,\pi^2)$}\hspace{2em}
+        (E)~{$(-4,3)$}\\[0.6em]
+
+    \item 座標平面上過 $A(-2,2)$作圓$C:x^2+y^2-4x+4y-8=0$的兩切線，切點為 $B$、$C$，試問下列哪些正確？\\[0.5em]
+        (A)~{$\overline{AB}=4$}\hspace{2em}
+        (B)~{兩條切線互相垂直}\hspace{2em}
+        (C)~{$\overleftrightarrow{BC}:x-y=-2 $}\hspace{2em}
+        (D)~{$\triangle ABC$ 面積$=16$}\\[0.6em]
+        (E)~{$\triangle ABC$ 的外接圓可用方程式 $\Gamma:x^2+y^2=8$表示}\\[0.6em]
+
+    \item 座標平面上存在不等式組：$x\geq0$、$y\geq0$、$3x+2y\leq12$、$x+2y\geq6$所圍成的區域，試問下列哪些正確？\\[0.5em]
+        (A)~{所圍成的圖形為箏形}\hspace{2em}
+        (B)~{點$(1,4)$在區域內}\hspace{2em}
+        (C)~{點$(2,6)$到圍成區域的最短距離為$\cfrac{4\sqrt13}{13}$}\\[0.6em]
+        (D)~{直線 $x+2y+4=0$到圍成區域的最短距離為$2\sqrt5$}\hspace{2em}
+        (E)~{直線 $2x-y+4=0$ 通過圍成的區域(含邊界)}\\  
+        
+\end{enumerate}
+
+\subsection*{二、填充題(每題$6$分，共\ $60$\ 分)}
+\subsubsection*{( 答案請依答案卷規定撰寫，否則不予計分 )}
+\vspace{0.75em}
+\begin{enumerate}[itemsep=5em, topsep=2em]\setcounter{enumi}{0}
+
+    \item 座標平面上與點 $P_1(-5,-3)$距離為$2\sqrt7$的所有點所形成的圓方程式可寫成 $x^2+y^2+ax+by+c=0$，試問數對 $(a,b,c)$？
+
+    \item 座標平面上兩直線 $L_1:8x+15y-80=0$ 與 $L_2:8x+15y-120=0$ 之距離為 $\alpha$、直線 $L_1$ 與圓 $\Gamma_1:x^2+y^2-2x+4y-20=0$ 最短距離為 $\beta$，試問數對 $(\alpha,\beta)$？
+
+    \item 座標平面上有點 $A(2,5)$與直線$L_1$，做過點$A$且垂直直線$L_1$的直線$L_2$交$L_1$於點$(4,2)$，試問$A$對於直線$L_1$的對稱點座標。
+
+    \item 若方程式 $3x^2+3y^2+30x-24y+k=0$ 沒有圖形，求實數$k$之範圍。
+
+    \item 若一圓通過三點 $A(-6,8)$、$B(-8,4)$、$C(-3,-1)$，試寫出圓方程式。
+
+    \item 座標平面上直線$L$過點 $P(10,2)$ 且與圖形 $y=-\sqrt{36-x^2}$ 有兩個交點，試問直線$L$的斜率$m_L$範圍？
+
+    \item 座標平面上，若方程式 $a(x^2+xy+x)+b(x^2+xy-x)+c(-x^2+xy+3x)-2y^2-24=0$的圖形為一圓，則此圓的半徑$r$。
+
+    \vspace{8em}
+    \begin{minipage}[t]{0.7\linewidth}
+        \item 右圖為二元一次不等式$ax-by+c\leq0$的圖解，試比較$a,b,c$與$0$的大小關係？
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.25\linewidth}
+    \vspace*{0pt}
+    \begin{tikzpicture}[baseline=(current bounding box.north), scale=0.75]
+        \begin{axis}[
+            axis lines=middle,
+            axis line style={->},
+            axis on top,
+            xlabel={$x$},
+            ylabel={$y$},
+            xmin=-2, xmax=2,
+            ymin=-3, ymax=3,
+            ticks=none,
+            enlargelimits=false,
+            clip=false,
+            xlabel style={at={(axis description cs:1,0.5)}, anchor=west, xshift=2pt},
+            ylabel style={at={(axis description cs:0.5,1)}, anchor=south, yshift=2pt},
+        ]
+    
+        % Points
+        \addplot[
+            only marks,
+            mark=*,
+            mark size=2pt
+        ] coordinates {(0,1)};
+        \node[right] at (axis cs:0,1) {$1$};
+    
+        \addplot[
+            only marks,
+            mark=*,
+            mark size=2pt
+        ] coordinates {(-1,0)};
+        \node[above] at (axis cs:-1,0) {$-1$};
+
+        \addplot[
+            name path global=line,
+            domain=-2:1,
+            samples=2
+        ] {2*x + 1};
+        
+        % x 軸作為下界
+        \addplot[
+            name path global=xaxis,
+            domain=-2:2,
+            draw=none
+        ] {0};
+        \addplot[
+            name path global=top,
+            domain=-2:2,
+            draw=none
+        ] {3};
+        
+        % --- 填左半部灰色 ---
+        \addplot[
+            gray!40
+        ] fill between[
+            of=line and xaxis,
+            soft clip={domain=-2:-0.5} % 左半部分
+        ];
+
+        \addplot[
+            gray!40
+        ] fill between[
+            of= top and line,
+            soft clip={domain=-2:1} % 左半部分
+        ];
+    
+        \end{axis}
+    \end{tikzpicture}
+    \end{minipage}
+
+    \item 一直線 $L$ 與兩直線 $L_1:3x+4y=24$、$L_2:3x-2y=6$， 分別相交於 $A$、$B$ 兩點，若$\overline {AB}$ 之中點為原點，試求出直線$L$方程式？
+
+    \item 座標平面上，點$P(8,16)$處有一光源朝四周發光，有一圓形障礙物其方程式$x^2+(y-1)^2=1$，若$x$軸為地面，則該圓形障礙物在地面上的影長為多少單位？\\[5em]
+    
+\end{enumerate}
+
+\subsection*{三、配合題(每題$4$分，共\ $16$\ 分)}
+已知座標平面上有三條直線方程式 $L_1:x+y=0$、$L_2:x+y=0$、$L_3:7x-y+144=0$ 的交點，試求出三條直線所圍成的三角形$\triangle ABC$：\\[0.6em]
+(1)\ $\triangle ABC$外心\hspace{5em} (2)\ $\triangle ABC$內心\hspace{5em} (3)\ $\triangle ABC$垂心\hspace{5em} (4)\ $\triangle ABC$重心\hspace{5em} 
+
+% 參考文獻：
+% https://imcct.net/UserFiles/files/20241216112735_0.pdf
+% https://zh.wikipedia.org/zh-tw/%E5%9B%BD%E9%99%85%E8%B1%A1%E6%A3%8B%E7%9B%98%E4%B8%8E%E9%BA%A6%E7%B2%92%E9%97%AE%E9%A2%98
+
+\end{document}

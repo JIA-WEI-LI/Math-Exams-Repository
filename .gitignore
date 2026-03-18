@@ -11,6 +11,7 @@ __pycache__/
 *.gz
 *.fdb_latexmk
 *.fls
+*.synctex
 *.synctex.gz
 *.pdf-sys-g*
 *.xdv

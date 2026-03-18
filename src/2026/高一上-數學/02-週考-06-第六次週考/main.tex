@@ -1,0 +1,208 @@
+\documentclass[b4paper,12pt]{exam}
+
+%% 引入Package %%
+\usepackage{graphicx}
+\usepackage{extsizes}
+\usepackage[margin=2cm]{geometry}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{mathtools,amsthm,amssymb}
+\usepackage[shortlabels,inline]{enumitem}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{decorations.pathmorphing,decorations.markings,arrows.meta,calc,intersections,bending}
+\usepackage{ulem}
+\usepackage{ifthen}
+\usepackage{draftwatermark}
+
+% 浮水印開關
+\newif\ifshowWatermark
+\showWatermarktrue
+\ifshowWatermark
+  \SetWatermarkText{中山附中樣卷}
+  \SetWatermarkScale{0.8}
+\else
+  \SetWatermarkText{}
+\fi
+
+% 選擇題排版指令
+\newcommand{\anslabel}[1]{%
+  \makebox[3em][c]{%
+    \ifshowAnswer{\color{red}#1}\else\phantom{#1}\fi
+  }%
+}
+
+\newcommand{\fourch}[7]{\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(A)~#1 & (B)~#2 & (C)~#3 & (D)~#4 & (E)~#5\end{tabular}}
+\newcommand{\twoch}[7]{\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(A)~#1 & (B)~#2\end{tabular}\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(C)~#3 & (D)~#4\end{tabular}\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(E)~#5 & ~\end{tabular}}
+\newcommand{\onech}[6]{\vspace{#6}\\(A)~#1\vspace{#6}\\(B)~#2\vspace{#6}\\(C)~#3\vspace{#6}\\(D)~#4\vspace{#6}\\(E)~#5}
+
+% 簡化命令
+\newcommand\twoSolution[2]{$x=#1$ 或 $x=#2$}
+
+% 標題區塊參數化
+\newcommand\testTitle[1]{\section*{#1}}
+\newcommand\testSubsection[4]{\subsection*{#1 (每#2\ #3\ 分，共\ #4\ 分)}}
+
+% 中文字體 (需 XeLaTeX)
+\usepackage[CJKmath=true,AutoFakeBold=3,AutoFakeSlant=.2]{xeCJK}
+\setCJKmainfont{AR PL KaitiM Big5}
+\setCJKsansfont{AR PL KaitiM Big5}
+\setCJKmonofont{AR PL KaitiM Big5}
+\newCJKfontfamily\Kai{標楷體}
+\newCJKfontfamily\Hei{微軟正黑體}
+\newCJKfontfamily\NewMing{新細明體}
+\XeTeXlinebreaklocale "zh"
+
+% 格式設定
+\setlength{\headheight}{15pt}
+\setlength{\parindent}{22pt}
+
+% 答案開關
+\newif\ifshowAnswer
+\showAnswerfalse
+\newcommand{\colorAnswer}[2]{%
+{
+  \makebox[6em][c]{% <-- 固定寬度，自己調整
+    \ifshowAnswer
+      {\color{#1}#2}%
+    \else
+      % 不顯示答案，但保持空間
+      % 可以放空白，或放透明字
+      \phantom{#2}%
+    \fi
+  }}%
+}
+
+\begin{document}
+\captionsetup[figure]{labelfont={bf}, name={\text{圖}}, labelsep=period}
+\captionsetup[table]{labelfont={bf}, name={\text{表}}, labelsep=period}
+
+% ====== 考卷標題 ======
+{\centering
+\testTitle{國立中山大學附中114學年度第一學期高一上數學第六次周考}
+}
+
+\hfill 一年\hspace{2em}班\hspace{2em}號\quad 姓名：\hspace{6em}\quad\\
+\vspace{0.5em}
+
+\footer {}{\iflastpage{\textbf{請記得檢查並驗算}}{\oddeven{\textbf{背面仍有題目，請翻面作答}}{}}}{}
+
+% ====== 一、多重選擇題 ======
+\testSubsection{一、多重選擇題}{題}{8}{24}
+\begin{enumerate}[itemsep=0.5em, topsep=1em,
+                  label=\arabic*.]
+    \item(\anslabel{CDE}) 坐標平面上有二次函數 $f(x) = −( x + 7 )^2 + 15$ 的圖形,今將此圖形向右平移 $10$單位，平移後新函數為$g(x)$,平移過程中此圖形與 $y$ 軸的交點也會跟著變化。假設此圖形與 $y$ 軸的交點為 $P$,下列何者正確?【114.會考改】\\[.5em]
+        (A)~{平移後的新函數$g(x)$最小值為$-15$}\hspace{9.5em}
+        (B)~{在平移過程中，$P$點會先向下再向上}\\[.5em]
+        (C)~{平移前的$f(x)$與平移後的$g(x)$僅有一個交點}\hspace{5em}
+        (D)~{$f(x)$與直線$L_1:x+2y=1$有交點}\\[.5em]
+        (E)~{$g(x)$與直線$L_2:2x-y=5$有交點}
+
+    \begin{minipage}[t]{0.65\linewidth}
+        \item(\anslabel{ACE}) 若$a,b\in\mathbb{R}$，且二次函數$f(x)=a(x+2)^2+b$滿足$f(1)>0\,,\,f(3)<0$，則下列何者不正確？【小白\,3-2】\\[.5em]
+            (A)~{$f(-3)>0$}\hspace{2em}
+            (B)~{$f(-1)>0$}\hspace{2em}
+            (C)~{$f(0)>0$}\hspace{2em}
+            (D)~{$f(2)>0$}\hspace{2em}
+            (E)~{$f(4)>0$}\\
+
+        \item (\anslabel{}) 如右圖，若三條函數分別為$f(x)=a_1x^3$、$g(x)=a_2(x-3)^3$、$h(x)=a_3(x-k)^2$，試問下列何者正確？【課本習題】\\[.5em]
+            (A)~{圖中虛線為$g(x)$圖形，且點對稱於$(3,0)$}\hspace{2em}
+            (B)~{$a_1a_2<0$}\hspace{2em}
+            (C)~{$a_3<0$}\hspace{2em}
+            (D)~{$k>0$}\hspace{2em}
+            (E)~{$f(x)$與$g(x)$對稱於$x=1.5$}\\
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.3\linewidth}
+    \begin{tikzpicture}[baseline=(current bounding box.north), scale=0.8]
+        \begin{axis}[
+                legend pos=outer north east,
+                axis x line=middle,
+                axis y line=middle,
+                % grid=major,
+                xtick={-4, -2, 0, 2, 4},
+                ytick={-5, 0, 5},
+                xmin=-8,xmax=6,
+                ymin=-6,ymax=6,
+            ]
+        \addplot[
+            domain=-6:6, % 定義函數的範圍
+            samples=150,
+            color=black,
+            line width=2pt,
+            dashed,
+            % mark=square*,
+            ]
+            {1*(x-3)^3};
+        \addplot[
+            domain=-6:6, % 定義函數的範圍
+            samples=150,
+            color=black,
+            line width=2pt,
+            % mark=square*,
+            ]
+            {-1*(x)^3};
+        \addplot[
+            domain=-8:0, 
+            samples=150, % 換個顏色以便區分
+            line width=2pt,
+            ]
+            {-1*(x+4)^2};
+        \end{axis}
+    \end{tikzpicture}
+    \end{minipage}
+\end{enumerate}
+
+% ====== 二、填充計算題 ======
+\subsection*{二、填充計算題 (前三題每格\ 2\ 分，其餘每格\ 7\ 分，共\ 76\ 分)}
+\begin{enumerate}[itemsep=1em, topsep=1em]
+    \item 試問下列函數圖形與$x$軸交點(無交點亦須註明)：【課本例題8】\\[0.5em]
+        (1)~$f_1(x)=-x^2-7x+18$。\underline{\colorAnswer{red}{$?$}}。\hspace{2em}
+        (2)~$f_2(x)=x^2+x+5$。\underline{\colorAnswer{red}{$?$}}。\\[.5em]
+        (3)~$f_3(x)=3x^2+20x-8$。\underline{\colorAnswer{red}{$?$}}。\hspace{2.5em}
+        (4)~$f_4(x)=(\sqrt{2}-1)x^2-2\sqrt{2}x+(\sqrt{2}+1)$。\underline{\colorAnswer{red}{$?$}}。
+
+    \item 下列函數在給定$x$值時，附近的圖形會近似於哪一個一次函數：【課本例題7】\\[0.5em]
+        (1)~$f_1(x)=x^3-2x+1$，在$x=2$。\underline{\colorAnswer{red}{$?$}}。\hspace{1em}
+        (2)~$f_2(x)=-2x^3+3x+1$，在$x=-2$。\underline{\colorAnswer{red}{$?$}}。\\[.5em]
+        (3)~$f_3(x)=\frac{1}{2}x^2-x$，在$x=0$。\underline{\colorAnswer{red}{$?$}}。\hspace{0.5em}
+        (4)~$f_4(x)=\frac14x^3-\frac{13}4x^2+13x-10$，在$x=2$。\underline{\colorAnswer{red}{$?$}}。
+
+    \item $y=f(x)=2x^3-12x^2+14x+9$化為標準式$y=a(x-h)^3+b(x-h)+k$，試問：【小白P.76】\\[0.5em]
+        (1)~$(a,b,h,k)=$\underline{\colorAnswer{red}{$?$}}。\hspace{5em}
+        (2)~對稱中心座標：\underline{\colorAnswer{red}{$?$}}。
+
+    \item 已知一次函數滿足$f(1)=3$、$f(5)=7$，試問 $f(-3)$ 之值：\underline{\colorAnswer{red}{$?$}}。【課本例題2】
+
+    \item 已知社團每人收$3000$元會有$100$人報名，若費用每提高$100$元，則報名人數減少$2$人，試問費用訂為多少時收入總額最高？\underline{\colorAnswer{red}{$?$}}元【綜合練習】
+
+    \item 設$-2\leq x\leq2$，若$-2x^2+12x+2$的最小值與最大值分別為$a$、$b$，試問$(a,b)=$\underline{\colorAnswer{red}{$?$}}。【小白P.74】
+    
+    \item 已知$f(x)=(x-1)^3+(x-2)^3+\cdots+(x-12)^3$的對稱中心為$(h,k)$，試問$h=$\underline{\colorAnswer{red}{$?$}}。【小白P.82】
+
+    \item 已知二次函數 $f(x)=-x^2+4x+1$。若將其圖形向右平移 $m$ 單位（$m>0$）得到新函數 $g(x)$。已知 $g(x)$ 在區間 $0\leq x\leq3$ 上的最大值為 $1$，試求實數 $m$ 之值為\underline{\colorAnswer{red}{$?$}}。
+
+    \item 給定一實係數三次多項式函數 $f(x) = ax^3 + bx^2 + cx + 3$。令 $g(x)=f(-x)-3$，已知 $y=g(x)$ 圖形的對稱中心為 $(1, 0)$ 且 $g(-1)<0$。試問：【111.學測A】
+        \begin{enumerate}[label=(\arabic*)]
+            \item $y = f(x)$ 圖形的對稱中心為： \underline{\colorAnswer{red}{$?$}}。
+            \item 比較 $f(-100)$ 與 $f(100)$ 之大小關係：\underline{\colorAnswer{red}{$?$}}。
+        \end{enumerate}
+
+    \item 已知實係數三次多項式$f(x)$除以$x+6$得商式$q(x)$和餘式$3$。若$q(x)$在$x=−6$有最大值$8$，則$y=f(x)$圖形的對稱中心：\underline{\colorAnswer{red}{$?$}}。【114.學測A】
+    
+    % \vspace{1em}
+
+    % \begin{minipage}[t]{0.7\linewidth}
+    %     \item 
+    % \end{minipage}
+    % \hfill
+    % \begin{minipage}[t]{0.25\linewidth}
+    % \begin{tikzpicture}[baseline=(current bounding box.north), scale=0.5]
+        
+    % \end{tikzpicture}
+    % \end{minipage}
+\end{enumerate}
+
+\end{document}

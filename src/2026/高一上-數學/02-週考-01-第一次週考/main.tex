@@ -1,0 +1,141 @@
+\documentclass[b4paper,12pt]{exam}
+
+%% 引入Package %%
+\usepackage{graphicx}
+\usepackage{extsizes}
+\usepackage[margin=2cm]{geometry}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{mathtools,amsthm,amssymb}
+\usepackage[shortlabels,inline]{enumitem}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.pathmorphing,decorations.markings,arrows.meta,calc,intersections,bending}
+\usepackage{ulem}
+\usepackage{enumitem}
+\usepackage{ifthen}
+\usepackage{draftwatermark}
+
+% 浮水印開關
+\newif\ifshowWatermark
+\showWatermarktrue
+\ifshowWatermark
+  \SetWatermarkText{中山附中樣卷}
+  \SetWatermarkScale{0.8}
+\else
+  \SetWatermarkText{}
+\fi
+
+% 選擇題排版指令
+\newcommand{\anslabel}[1]{%
+  \makebox[3em][c]{%
+    \ifshowAnswer{\color{red}#1}\else\phantom{#1}\fi
+  }%
+}
+\newcommand{\anslist}[1]{#1}
+
+\newcommand{\fourch}[7]{\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(A)~#1 & (B)~#2 & (C)~#3 & (D)~#4 & (E)~#5\end{tabular}}
+\newcommand{\twoch}[7]{\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(A)~#1 & (B)~#2\end{tabular}\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(C)~#3 & (D)~#4\end{tabular}\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(E)~#5 & ~\end{tabular}}
+\newcommand{\onech}[6]{\vspace{#6}\\(A)~#1\vspace{#6}\\(B)~#2\vspace{#6}\\(C)~#3\vspace{#6}\\(D)~#4\vspace{#6}\\(E)~#5}
+
+% 簡化命令
+\newcommand\twoSolution[2]{$x=#1$ 或 $x=#2$}
+
+% 標題區塊參數化
+\newcommand\testTitle[1]{\section*{#1}}
+\newcommand\testSubsection[3]{\subsection*{#1 (每題\ #2\ 分，共\ #3\ 分)}}
+
+% 中文字體 (需 XeLaTeX)
+\usepackage[CJKmath=true,AutoFakeBold=3,AutoFakeSlant=.2]{xeCJK}
+\setCJKmainfont{AR PL KaitiM Big5}
+\setCJKsansfont{AR PL KaitiM Big5}
+\setCJKmonofont{AR PL KaitiM Big5}
+\newCJKfontfamily\Kai{標楷體}
+\newCJKfontfamily\Hei{微軟正黑體}
+\newCJKfontfamily\NewMing{新細明體}
+\XeTeXlinebreaklocale "zh"
+
+% 格式設定
+\setlength{\headheight}{15pt}
+\setlength{\parindent}{22pt}
+
+% 答案開關
+\newif\ifshowAnswer
+\showAnswerfalse
+\newcommand{\colorAnswer}[2]{%
+{
+  \makebox[6em][c]{% <-- 固定寬度，自己調整
+    \ifshowAnswer
+      {\color{#1}#2}%
+    \else
+      % 不顯示答案，但保持空間
+      % 可以放空白，或放透明字
+      \phantom{#2}%
+    \fi
+  }}%
+}
+
+\begin{document}
+\captionsetup[figure]{labelfont={bf}, name={\text{圖}}, labelsep=period}
+\captionsetup[table]{labelfont={bf}, name={\text{表}}, labelsep=period}
+
+% ====== 考卷標題 ======
+{\centering
+\testTitle{國立中山大學附中114學年度第一學期高一上數學第一次周考(改版)}
+}
+
+出題者：{朱世鋒}\quad 教師 \hfill 一年\hspace{2em}班\hspace{2em}號\quad 姓名：\hspace{6em}\quad\\
+\vspace{0.5em}
+
+\footer {}{\iflastpage{\textbf{請記得檢查並驗算}}{\oddeven{\textbf{背面仍有題目，請翻面作答}}{}}}{}
+
+% ====== 一、多重選擇題 ======
+\testSubsection{一、多重選擇題}{8}{16}
+\begin{enumerate}[itemsep=0.5em, topsep=1em,
+                  label=\arabic*.]
+    \item(\anslabel{BC}) 下列敘述何者正確？\\[.5em]
+        (A)~{若 $a$ 是有理數，$b$ 是無理數，則 $ab$ 必是無理數}\hspace{.5em}
+        (B)~{若 $a$ 是有理數，$b$ 是無理數，則 $a+b$ 必是無理數}\\[.5em]
+        (C)~{若 $a+b$，$a-b$ 均為有理數，則 $a$、$b$ 必為有理數}\hspace{.5em}
+        (D)~{若 $a$，$b$ 是實數且 $a+b\sqrt{3}=0$，則 $a=0$ 且 $b=0$}\\[.5em]
+        (E)~{若 $a$，$b$ 是有理數且 $ab\neq0$，則 $a+b\sqrt{3}$ 可能等於 $0$}
+
+    \item(\anslabel{AB}) 下列哪些數可化為有限小數？\\[.5em]
+        (A)~{$\cfrac{108}{30}$}\hspace{1.5em}
+        (B)~{$\cfrac{234}{45}$}\hspace{1.5em}
+        (C)~{$\cfrac{20}{35}$}\hspace{1.5em}
+        (D)~{$\cfrac{5}{22}$}\hspace{1.5em}
+        (E)~{$\cfrac{9}{108}$}\\
+\end{enumerate}
+
+% ====== 二、填充計算題 ======
+\testSubsection{二、填充計算題}{7}{84}
+\begin{enumerate}[itemsep=1.5em, topsep=2em]
+    \item $(2+3\sqrt{3})x+(1-2\sqrt{3})y=8+5\sqrt{3}$，$ x,y\in \mathbb{Q}$，則 $x+y$ 之值為 \underline{\colorAnswer{red}{$5$}}。
+
+    \item 已知 $a=\sqrt{11}+\sqrt{7}$，$b=\sqrt{10}+\sqrt{8}$，$c=6$，則 $a$，$b$，$c$大小順序為\underline{\colorAnswer{red}{$c>b>a$}}。
+
+    \item 化 $0.2\overline{58}$ 為最簡分數 $=$\underline{\colorAnswer{red}{$\cfrac{128}{495}$}}。
+
+    \item 將 $\cfrac{5}{7}$ 化為小數時，小數點後第 $1999$ 位的數字為 \underline{\colorAnswer{red}{$7$}}。
+
+    \item 設 $a$ 為實數且 $a>1$，求 $a+\cfrac{4}{a-1}$ 的最小值為 \underline{\colorAnswer{red}{$5$}}。
+
+    \item 不等式 $|x|+|x-5|<10$ 的解為 \underline{\colorAnswer{red}{$-\cfrac{5}{2}<x<\cfrac{15}{2}$}}。
+
+    \item 化簡 $\sqrt{2-\sqrt{3}}-\sqrt{2+\sqrt{3}}$得其值$=$ \underline{\colorAnswer{red}{$-\sqrt{2}$}}。
+
+    \item 已知數線上三點 $A$、$B$、$C$ 坐標依次為 $-2$、$10$、$x$，且 $\overline{AC}:\overline{BC}=2:3$，則 $x$ 的值為 \underline{\colorAnswer{red}{$\cfrac{14}{5}$, $-26$}}。
+
+    \item 若 $\sqrt{10+2\sqrt{24}}=x+y$，其中 $x$ 為整數，且 $0<y<1$，則$\cfrac{2}{y}+2=$ \underline{\colorAnswer{red}{$\sqrt{6}+4$}}。
+
+    \item $n\in\mathbb{N}$，$100000<n<200000$，且 $n$ 之個位數字及十位數字皆為 $0$ (百位數字不是 $0$)，又 $\cfrac{1}{n}$ 是有限小數，求$n=$ \underline{\colorAnswer{red}{$12500$、$12800$}}。
+
+    \item 解不等式 $|2x-5|>9$。\underline{\colorAnswer{red}{$x>7$, $x<-2$}}。
+
+    \item 若 $|ax+1|>b$的解為$x>2$或$x<-1$，則數對 $(a,b)=$ \underline{\colorAnswer{red}{$(-2,3)$}}。
+
+    % ...可繼續新增題目
+\end{enumerate}
+
+\end{document}

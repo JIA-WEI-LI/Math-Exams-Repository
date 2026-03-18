@@ -1,0 +1,181 @@
+\documentclass[b4paper,12pt]{exam}
+
+%% 引入Package %%
+\usepackage{graphicx}
+\usepackage{extsizes}
+\usepackage[margin=2cm]{geometry}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{mathtools,amsthm,amssymb}
+\usepackage[shortlabels,inline]{enumitem}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.pathmorphing,decorations.markings,arrows.meta,calc,intersections,bending}
+\usepackage{ulem}
+\usepackage{enumitem}
+\usepackage{ifthen}
+\usepackage{draftwatermark}
+
+% 浮水印開關
+\newif\ifshowWatermark
+\showWatermarktrue
+\ifshowWatermark
+  \SetWatermarkText{中山附中樣卷}
+  \SetWatermarkScale{0.8}
+\else
+  \SetWatermarkText{}
+\fi
+
+% 選擇題排版指令
+\newcommand{\anslabel}[1]{%
+  \makebox[3em][c]{%
+    \ifshowAnswer{\color{red}#1}\else\phantom{#1}\fi
+  }%
+}
+\newcommand{\anslist}[1]{#1}
+
+\newcommand{\fourch}[7]{\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(A)~#1 & (B)~#2 & (C)~#3 & (D)~#4 & (E)~#5\end{tabular}}
+\newcommand{\twoch}[7]{\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(A)~#1 & (B)~#2\end{tabular}\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(C)~#3 & (D)~#4\end{tabular}\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(E)~#5 & ~\end{tabular}}
+\newcommand{\onech}[6]{\vspace{#6}\\(A)~#1\vspace{#6}\\(B)~#2\vspace{#6}\\(C)~#3\vspace{#6}\\(D)~#4\vspace{#6}\\(E)~#5}
+
+% 簡化命令
+\newcommand\twoSolution[2]{$x=#1$ 或 $x=#2$}
+
+% 標題區塊參數化
+\newcommand\testTitle[1]{\section*{#1}}
+\newcommand\testSubsection[3]{\subsection*{#1 (每題\ #2\ 分，共\ #3\ 分)}}
+
+% 中文字體 (需 XeLaTeX)
+\usepackage[CJKmath=true,AutoFakeBold=3,AutoFakeSlant=.2]{xeCJK}
+\setCJKmainfont{AR PL KaitiM Big5}
+\setCJKsansfont{AR PL KaitiM Big5}
+\setCJKmonofont{AR PL KaitiM Big5}
+\newCJKfontfamily\Kai{標楷體}
+\newCJKfontfamily\Hei{微軟正黑體}
+\newCJKfontfamily\NewMing{新細明體}
+\XeTeXlinebreaklocale "zh"
+
+% 格式設定
+\setlength{\headheight}{15pt}
+\setlength{\parindent}{22pt}
+
+% 答案開關
+\newif\ifshowAnswer
+\showAnswertrue
+\newcommand{\colorAnswer}[2]{%
+{
+  \makebox[6em][c]{% <-- 固定寬度，自己調整
+    \ifshowAnswer
+      {\color{#1}#2}%
+    \else
+      % 不顯示答案，但保持空間
+      % 可以放空白，或放透明字
+      \phantom{#2}%
+    \fi
+  }}%
+}
+
+\begin{document}
+\captionsetup[figure]{labelfont={bf}, name={\text{圖}}, labelsep=period}
+\captionsetup[table]{labelfont={bf}, name={\text{表}}, labelsep=period}
+
+% ====== 考卷標題 ======
+{\centering
+\testTitle{國立中山大學附中114學年度第一學期高一上數學第一次段考卷}
+}
+
+\hfill 一年\hspace{2em}班\hspace{2em}號\quad 姓名：\hspace{6em}\quad\\
+\vspace{0.5em}
+
+\footer {}{\iflastpage{\textbf{請記得檢查並驗算}}{\oddeven{\textbf{背面仍有題目，請翻面作答}}{}}}{}
+
+\subsection*{一、多重選擇題(每題\ 8\ 分，錯一個選項扣\ 3\ 分，共\ 24\ 分)}
+\begin{enumerate}[itemsep=0.5em, topsep=1em]\setcounter{enumi}{0}
+    \item 有關下列描述，何者正確？\\[0.5em]
+        (A)~{已知 $\cfrac{22}{7}$ 不可化為有限小數，故 $\cfrac{22}{7}$ 為無理數}\\[0.6em]
+        (B)~{若 $a$，$b$ 是有理數且 $ab\neq0$，則 $a+b\sqrt{5}$ 可能等於 $0$}\\[0.6em]
+        (C)~{已知 $a$、$b$ 屬於實數，若 $a+b\sqrt{5}=0$，則 $a$、$b$ 必為有理數}\\[0.6em]
+        (D)~{已知 $|3x-1|\geq2$，則解的範圍區間可以寫成 $ (-\infty , -\cfrac{1}{3}\ ] \cup [\ 1,\infty) $}\\[0.6em]
+        (E)~{設 $|\alpha|>|\beta|$，且 $\alpha$、$\beta$ 屬於非零實數，則 $|\alpha|+|\beta| > |\alpha| > |\beta| > 0$}\\
+
+    \item 設整數 $m$ 滿足不等式 $|10m-14|\geq 5|m|$，試問下列選項哪些正確？\\[.4em]
+        (A)~{$|10m-5m|\geq14$}\hspace{2em}
+        (B)~{$-1\leq\cfrac{5m}{10m-14}\leq1$}\hspace{2em}
+        (C)~{$10m-14\geq5m$}\hspace{2em}
+        (D)~{$(10m-14)^2\geq25m^2$}\\[0.6em]
+        (E)~{對於 $m$ 屬於任意整數，$\cfrac{(10m-14)+5m}{2}\geq\sqrt{(5m)\times(10m-14)}$}恆成立
+        
+    \item 三直線 $L_1:2x+y-4=0$、$L_2:5x-y+10=0$、$L_3:x+\alpha y+3=0$，$\alpha$ 屬於任意實數，下列何者敘述正確？\\[0.6em]
+        (A)~{若 $\alpha=-\frac{1}{2}$，則 $L_1//L_3$}\hspace{4em}
+        (B)~{若 $\alpha=5$，則 $L_2\bot L_3$}\hspace{4em}
+        (C)~{若 $\alpha=6$，則 $L_3$ 的 $x$ 截距為 $3$}\\[0.6em]
+        (D)~{若 $L_1$、$L_2$、$L_3$ 可圍成直角三角形，則 $\alpha=-2$或$5$}\\[0.6em]
+        (E)~{若 $\alpha>0$，則 $L_3$必不通過第四象限；若 $\alpha<0$，則 $L_3$必不通過第一象限}
+        
+\end{enumerate}
+
+\subsection*{二、填充題($1\sim8$題每題$8$分，第$9$題內每小題$4$分，共\ 76\ 分)}
+\subsubsection*{( 直線方程式答案請使用一般式 $L:ax+by+c=0$ ，$a,\ b,\ c\in \mathbb{Z}$且$(a,\ b,\ c)=1$，否則不予計分 )}
+\vspace{0.75em}
+\begin{enumerate}[itemsep=5em, topsep=2em]\setcounter{enumi}{0}
+
+    \item 解不等式 $1<|2x+3|\leq9$。
+
+    \item 計算將 $\cfrac{3}{13}$ 化為循環小數時，小數點後第 $2025$ 位的數字。
+
+    \item 已知 $a+a^{-1}=5$，試問 $(a^3+a^{-3})(a^4-a^{-4})$。
+
+    \item 設 $x,\ y$均為不為 $0$ 的實數，若 $16^x=25^y=20^{xy}$，則問 $x+y$。
+    
+    \newpage
+
+    \item 已知直線 $L_1:3x+5y-7=0$，今有另一直線 $L_2$ 平行於 $L_1$ 且 $y$ 截距為 $2$，試求 $L_2$ 直線方程式。
+
+    \item 現某種有害人體的病菌在人體內會以指數方式增長，每小時會由$1$個分裂成$2$個。當人體內的病菌達$100$萬個時，身體便會出現不適症狀。若某人一開始將 $1000$ 個該病菌吸入體內，則將在多少小時後身體開始出現不適症狀。(取整數)
+
+    \item 投資一直以來是人們關注的數學難題，其中一個常選擇的問題是「選擇$100$萬元，還是選擇在一個月內每天變$2$倍的1分錢($0.01$元)？」。若選擇每天變$2$倍的$1$分錢($0.01$元)且不限時間，試問達第幾天時當日拿到的錢會超過$100$萬？($\log{2}\approx0.3010$)
+
+    \item 已知通過點$(3,5)$的直線有無限多條，試求在第一象限與兩坐標軸所圍成之三角形：
+    \begin{enumerate}
+        \item 三角形面積的最小值。
+        \item 三角形面積最小時直線方程式。
+    \end{enumerate}
+
+    \vspace{8em}
+    \begin{minipage}[t]{0.7\linewidth}
+        \item 如圖，已知座標平面上有矩形 $ABCD$ 且點座標分別為 $A(0,3)$、$B(4,0)$、$C(16,16)$、$D(12,19)$，試回答下列問題：
+        \begin{enumerate}
+            \item 求$\overline{BC}$中垂線方程式。
+            \item 今在 $\overline{BC}$ 上取一點 $R$，且$\overline{BR}:\overline{CR}=1:3$，試求 $R$ 座標。
+            \item 今在$\overline{BC}$ 上取另一點 $P$，並將 $D$ 連結 $P$ 並延伸 $\overline{DP}$ 至 $\overline{AB}$ 延伸線上交於 $Q$(如圖)，試問圖中著色面積( $\triangle CDP+\triangle BQP$面積)最小值。
+        \end{enumerate}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.25\linewidth}
+    \begin{tikzpicture}[baseline=(current bounding box.north), scale=0.2]
+        % \draw[step=2, gray!20, very thin] (-1,-10) grid (20,20);
+
+        \coordinate[label=left:$A$] (A) at (0,3);
+        \coordinate[label=below left:$B$] (B) at (4,0);
+        \coordinate[label=right:$C$] (C) at (16,16);
+        \coordinate[label=above:$D$] (D) at (12,19);
+        \draw[very thin] (A) -- (B) -- (C) -- (D) -- cycle;
+
+        \coordinate[label=right:$P$] (P) at (11.5,10);
+        \coordinate[label=below:$Q$] (Q) at (10.5,-5);
+        \draw[very thin] (D) -- (P) -- (Q) -- (B);
+        \filldraw[fill=gray!30, draw=black] (C) -- (D) -- (P) -- cycle;
+        \filldraw[fill=gray!30, draw=black] (B) -- (P) -- (Q) -- cycle;
+
+        \draw[->] (-1,0) -- (22,0) node[right] {$x$};
+        \draw[->] (0,-10) -- (0,22) node[above] {$y$};
+        
+    \end{tikzpicture}
+    \end{minipage}
+\end{enumerate}
+
+% 參考文獻：
+% https://imcct.net/UserFiles/files/20241216112735_0.pdf
+% https://zh.wikipedia.org/zh-tw/%E5%9B%BD%E9%99%85%E8%B1%A1%E6%A3%8B%E7%9B%98%E4%B8%8E%E9%BA%A6%E7%B2%92%E9%97%AE%E9%A2%98
+
+\end{document}

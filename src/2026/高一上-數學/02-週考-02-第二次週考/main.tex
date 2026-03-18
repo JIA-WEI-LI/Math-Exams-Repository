@@ -1,0 +1,166 @@
+\documentclass[b4paper,12pt]{exam}
+
+%% 引入Package %%
+\usepackage{graphicx}
+\usepackage{extsizes}
+\usepackage[margin=2cm]{geometry}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{mathtools,amsthm,amssymb}
+\usepackage[shortlabels,inline]{enumitem}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.pathmorphing,decorations.markings,arrows.meta,calc,intersections,bending}
+\usepackage{ulem}
+\usepackage{enumitem}
+\usepackage{ifthen}
+\usepackage{draftwatermark}
+
+% 浮水印開關
+\newif\ifshowWatermark
+\showWatermarktrue
+\ifshowWatermark
+  \SetWatermarkText{中山附中樣卷}
+  \SetWatermarkScale{0.8}
+\else
+  \SetWatermarkText{}
+\fi
+
+% 選擇題排版指令
+\newcommand{\anslabel}[1]{%
+  \makebox[3em][c]{%
+    \ifshowAnswer{\color{red}#1}\else\phantom{#1}\fi
+  }%
+}
+\newcommand{\anslist}[1]{#1}
+
+\newcommand{\fourch}[7]{\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(A)~#1 & (B)~#2 & (C)~#3 & (D)~#4 & (E)~#5\end{tabular}}
+\newcommand{\twoch}[7]{\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(A)~#1 & (B)~#2\end{tabular}\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(C)~#3 & (D)~#4\end{tabular}\vspace{#6}\\\begin{tabular}{*{4}{@{}p{#7}}}(E)~#5 & ~\end{tabular}}
+\newcommand{\onech}[6]{\vspace{#6}\\(A)~#1\vspace{#6}\\(B)~#2\vspace{#6}\\(C)~#3\vspace{#6}\\(D)~#4\vspace{#6}\\(E)~#5}
+
+% 簡化命令
+\newcommand\twoSolution[2]{$x=#1$ 或 $x=#2$}
+
+% 標題區塊參數化
+\newcommand\testTitle[1]{\section*{#1}}
+\newcommand\testSubsection[4]{\subsection*{#1 (每#2\ #3\ 分，共\ #4\ 分)}}
+
+% 中文字體 (需 XeLaTeX)
+\usepackage[CJKmath=true,AutoFakeBold=3,AutoFakeSlant=.2]{xeCJK}
+\setCJKmainfont{AR PL KaitiM Big5}
+\setCJKsansfont{AR PL KaitiM Big5}
+\setCJKmonofont{AR PL KaitiM Big5}
+\newCJKfontfamily\Kai{標楷體}
+\newCJKfontfamily\Hei{微軟正黑體}
+\newCJKfontfamily\NewMing{新細明體}
+\XeTeXlinebreaklocale "zh"
+
+% 格式設定
+\setlength{\headheight}{15pt}
+\setlength{\parindent}{22pt}
+
+% 答案開關
+\newif\ifshowAnswer
+\showAnswerfalse
+\newcommand{\colorAnswer}[2]{%
+{
+  \makebox[6em][c]{% <-- 固定寬度，自己調整
+    \ifshowAnswer
+      {\color{#1}#2}%
+    \else
+      % 不顯示答案，但保持空間
+      % 可以放空白，或放透明字
+      \phantom{#2}%
+    \fi
+  }}%
+}
+
+\begin{document}
+\captionsetup[figure]{labelfont={bf}, name={\text{圖}}, labelsep=period}
+\captionsetup[table]{labelfont={bf}, name={\text{表}}, labelsep=period}
+
+% ====== 考卷標題 ======
+{\centering
+\testTitle{國立中山大學附中114學年度第一學期高一上數學第二次周考}
+}
+
+\hfill 一年\hspace{2em}班\hspace{2em}號\quad 姓名：\hspace{6em}\quad\\
+\vspace{0.5em}
+
+\footer {}{\iflastpage{\textbf{請記得檢查並驗算}}{\oddeven{\textbf{背面仍有題目，請翻面作答}}{}}}{}
+
+% ====== 一、多重選擇題 ======
+\testSubsection{一、多重選擇題}{題}{8}{16}
+\begin{enumerate}[itemsep=0.5em, topsep=1em,
+                  label=\arabic*.]
+    \item(\anslabel{BCD}) 下列敘述何者正確？\\[.5em]
+        (A)~{$x=\log_{10}{A}$，則 $x$ 稱為「真數」，$10$ 稱為「底數」}\hspace{1em}
+        (B)~{已知 $x=\log_{10}{A}$，則 $10^x=A$}\\[.5em]
+        (C)~{已知 $a=\log{1}+\log{2}+\log{3}$、$b=\log{(1+2+3)}$，則$a=b$}\\[.5em]
+        (D)~{已知 $x$ 是 $A$ 取常用對數後的值，若 $x$ 值增加 $1$，則 $A$ 會變為原本的 $10$ 倍}\\[.5em]
+        (E)~{已知 $x$ 是 $A$ 取常用對數後的值，則 $\frac{A}{2}$ 取常用對數的值為 $x-1$}
+
+    \item(\anslabel{ABE}) 下列哪些整數滿足不等式 $2|x|-x > 3$？\\[.5em]
+        (A)~{$-4$}\hspace{2em}
+        (B)~{$-2$}\hspace{2em}
+        (C)~{$0$}\hspace{2em}
+        (D)~{$2$}\hspace{2em}
+        (E)~{$4$}\\
+\end{enumerate}
+
+% ====== 二、填充計算題 ======
+\subsection*{二、填充計算題 (前\ 12\ 格每格\ 6\ 分，其餘每格\ 3\ 分，共\ 84\ 分)}
+\begin{enumerate}[itemsep=1.5em, topsep=2em]
+    \item 計算下列各值(第二小題以科學記號表示，四捨五入取 $3$ 位有效數字)：\\[.5em]
+    (1)\ $[(\sqrt{11}-\sqrt{7})^3(\sqrt{11}+\sqrt{7})^3]^{0.5}=$\underline{\colorAnswer{red}{$8$}}\quad 
+    (2)\ $(1.03\times10^{-7})+(9.22\times10^{-6})=$\underline{\colorAnswer{red}{$9.32\times10^{-6}$}}
+
+    \item 若 $x$ 為實數滿足方程式 $|x-2|=\frac{1}{2}x+2$ ，則所有 $x$ 的總和為\underline{\colorAnswer{red}{$8$}}
+
+    \item 回答下列各數：
+    \begin{enumerate}
+        \item 已知 $\log{3}\approx0.4771$ 且 $\log\alpha=-3.5229$，試問$\alpha=$\underline{\colorAnswer{red}{$0.0003$}}
+        \item 已知 $\log{7}\approx0.8451$，計算 $7^{200}$ 為幾位數？\underline{\colorAnswer{red}{$170$}}
+        \item 已知 $\log{5}\approx0.6990$，計算 $5^{-40}$ 小數點後第幾位不為$0$？\underline{\colorAnswer{red}{$28$}}
+    \end{enumerate}
+
+    \item 若 $x$ 為正實數且 $x$ 的小數部分為 $y$，已知 $x^2+y^2=3$，試問 $(x^3+y^3)(x^3-y^3)=$\underline{\colorAnswer{red}{$8\sqrt{5}$}}
+
+    \item 請計算各數並寫成循環小數：(1)\ $0.000027^{-\frac{2}{3}}=$ \underline{\colorAnswer{red}{$1111.\overline{1}$}}。\quad (2)\ $343000^{-\frac{1}{3}}=$ \underline{\colorAnswer{red}{$0.0\overline{142857}$}}
+
+    \item 求函數$f(x)=|3x-6|+|3x+10|$\ (1)\ 最小值 $m=$ \underline{\colorAnswer{red}{$16$}}\ (2)\ 此時的 $x$ 範圍\underline{\colorAnswer{red}{$-\frac{10}{3}\leq x\leq2$}}
+
+    \item  已知 $\alpha$、$\beta$ 皆為有理數，若 $(\sqrt{6-\sqrt{20}})^3=\alpha+\beta\sqrt{5}$，則數對 $(\alpha,\beta)=$ \underline{\colorAnswer{red}{$(-16,8)$}}
+
+    \item 已知 $\alpha,\beta$ 為正實數，求 $(\alpha+\cfrac{4}{\beta})(\beta+\cfrac{16}{\alpha})$ 為最小值時，$\alpha\beta$的值為\underline{\colorAnswer{red}{$8$}}
+
+    \item 已知 $a$、$b$ 屬於實數，且 $2a^2+ab=4$，當 $3a+b$ 有最小值 $m$ 時，求數對 $(a, b, m)=$\underline{\colorAnswer{red}{$(2,-2,4)$}}
+    
+    \vspace{1em}
+
+    \begin{minipage}[t]{0.7\linewidth}
+        \item 如圖，今天有 $ABCD$ 四個箱子各放若干數量的球，數量如圖內數字所示，規則如下：每次球皆只能朝相鄰方向箱子移動(如$A$只可移動球至$B$或$D$)。今希望透過移動相鄰頂點的球使的每個箱子內球數量皆為 $10$ 顆，若第一次將 $A$ 箱內 $n$ 顆球移動到 $B$，試回答下列問題：(兩題以 $n$ 表示，結果為負值代表移動方向相反)
+        \begin{enumerate}
+            \item 令 $B$ 移動 $b$ 顆球到 $C$ 使得 $B$ 的球數為 $10$ 後，再自 $C$ 移動 $c$ 顆球到$D$ 使的$C$ 的球數為 $10$ 顆，最後再從 $D$ 移動 $d$ 顆球到 $A$ 使得 $D$ 的球數為 $10$ 顆，試問 $(b, c, d)=$\underline{\hspace{5em}\colorAnswer{red}{$(\ n-3\ ,\ n-5,\ n-2 )$}\hspace{5em}}
+            \item 呈上，寫出球被移動的總次數 $f(n)=$\underline{\hspace{4em}\colorAnswer{red}{$|n|+|n-3|+|n-5|+|n-2|$}\hspace{4em}}
+        \end{enumerate}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.25\linewidth}
+    \begin{tikzpicture}[baseline=(current bounding box.north), scale=0.65]
+        \node[draw, shape=rectangle, minimum size=8mm, label=below left:$B$] (B) at (0,0) {$7$};
+        \node[draw, shape=rectangle, minimum size=8mm, label=above left:$A$] (A) at (0,3) {$12$};
+        \node[draw, shape=rectangle, minimum size=8mm, label=below right:$C$] (C) at (3,0) {$8$};
+        \node[draw, shape=rectangle, minimum size=8mm, label=above right:$D$] (D) at (3,3) {$13$};
+        \path[<->, thick]
+            (A) edge[bend right=20] (B)
+            (B) edge[bend right=20] (C)
+            (C) edge[bend right=20] (D)
+            (D) edge[bend right=20] (A);
+    \end{tikzpicture}
+    \end{minipage}
+
+    % ...可繼續新增題目
+\end{enumerate}
+
+\end{document}
